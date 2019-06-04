@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Login</title>
+    <title>Login Page</title>
     <th:block th:insert="base :: header"></th:block>
+    <style>
+        body{
+            background-image:url("https://res.cloudinary.com/db9bfssj4/image/upload/v1559585648/giphy_uflhmy.gif") ;
+        }
+        h2 {
+            font:italic 5vw Baskerville,'fantasy';
+            text-align: center;
+        }
+
+    </style>
 </head>
 <body>
 
-    <div th:replace="base :: navlinks"></div>
+<div th:replace="base:: nav"></div>
 
-    <div th:if="${param.error}">
-        Invalid username and password.
-    </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label>User Name: <input type="text" name="username"/></label>
+<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+            <h1> Login</h1>
+            <div th:if="${param.error}">
+                Invalid username or password
+            </div>
+
+            <div th:if="${param.logout}">
+                You have been logged out
+            </div>
+
+            <form th:action="@{/login}" method="post">
+
+                <label class="mr-sm-2 mb-0">User name</label> <input type="text" class="form-control mr-sm-2 mb-2 mb-sm-0"
+                                                                     name="username"/>
+
+
+                <label class="mr-sm-2 mb-0">Password </label> <input type="password"  class="form-control mr-sm-2 mb-2 mb-sm-0"
+                                                                     name="password"/>
+
+                <div><input type="submit" value="Sign In"/></div>
+            </form>
+            <b>Not Registered? <a href="/register">Register Here!</a></b>
         </div>
-        <div>
-            <label>Password: <input type="password" name="password"/></label>
-        </div>
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
+
+    </div>
+</div>
+
+<div th:replace="base:: footer"></div>
 
 </body>
 </html>

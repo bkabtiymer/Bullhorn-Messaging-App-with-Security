@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:the="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login Page</title>
+    <th:block th:insert="base :: header"></th:block>
+    <style>
+        body {
+            background-image: url("https://res.cloudinary.com/db9bfssj4/image/upload/v1559585648/giphy_uflhmy.gif");
+        }
+
+        h2 {
+            font: italic 5vw Baskerville, 'fantasy';
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="base :: nav"></div>
+
+<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+            <h2>View messages </h2>
+
+            <div sec:authorize="hasAuthority('USER')">
+
+                Message Title :<span th:text="${message.title}"></span><br/>
+
+                Content  :<span th:text="${message.content}"></span><br/>
+
+                Posted By :<span th:text="${message.postedby}"></span><br/>
+                Post Date :<span th:text="${message.posteddate}"></span><br/>
+
+                <span th:if="${user_id == message.user.id}">
+                    <a th:href="@{/delete/{id}(id=${message.id})}">Delete this message </a>
+                </span>
+            </div>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                Message Title :<span th:text="${message.title}"></span><br/>
+
+                Content  :<span th:text="${message.content}"></span><br/>
+
+                Posted By :<span th:text="${message.postedby}"></span><br/>
+                Post Date :<span th:text="${message.posteddate}"></span><br/>
+                <a th:href="@{delete/{id}(id=${message.id})}">Delete this Message</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="base :: footer"></div>
+</body>
+</html>

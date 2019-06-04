@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:the="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login Page</title>
+    <th:block th:insert="base :: header"></th:block>
+    <style>
+        body {
+            background-image: url("https://res.cloudinary.com/db9bfssj4/image/upload/v1559585648/giphy_uflhmy.gif");
+        }
+
+        h2 {
+            font: italic 5vw Baskerville, 'fantasy';
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="base:: nav"></div>
+
+<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+
+            <h2>Add a Post:</h2>
+            <form action="#"
+                  th:action="@{/process}"
+                  th:object="${message}"
+                  method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <h4> Message Title :<textarea rows="2" th:field="*{title}"/>
+                    <span th:if="${#fields.hasErrors('title')}"
+                          th:errors="*{title}"></span><br/>
+                    Content :<textarea rows="4" th:field="*{content}"/>
+                    <span th:if="${#fields.hasErrors('content')}"
+                          th:errors="*{content}"></span><br/>
+                    Post Date :<input type="date" th:field="*{posteddate}"/>
+                    <span th:if="${#fields.hasErrors('posteddate')}"
+                          th:errors="*{posteddate}"></span><br/>
+                    Posted By :<textarea rows="2" th:field="*{postedby}"/>
+                    <span th:if="${#fields.hasErrors('postedby')}"
+                          th:errors="*{postedby}"></span><br/>
+                    <div>
+                        Upload Image: <input type="file" name="file"/><br><br>
+                    </div>
+                    <br/>
+                    <a class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                        <input type="submit" value="Submit"/></a>
+                </h4>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

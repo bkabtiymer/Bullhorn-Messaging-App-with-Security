@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Login Page</title>
+    <th:block th:insert="base :: header"></th:block>
+    <style>
+        body {
+            background-image: url("https://res.cloudinary.com/db9bfssj4/image/upload/v1559585648/giphy_uflhmy.gif");
+        }
+
+        h2 {
+            font: italic 5vw Baskerville, 'fantasy';
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+<div th:replace="base:: nav"></div>
+
+<div class="container">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body p-5">
+            <h1>PostMe</h1>
+            <p>Place to Share your day</p>
+
+
+            <div class="a">
+                <h1>Share your thoughts with us</h1>
+                <br>
+                <a href="/add">
+                    <button class="button"><span>Post </span></button>
+                </a>
+            </div>
+            <div sec:authorize="hasAuthority('USER')">
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Posted by</th>
+                        <th></th>
+                    </tr>
+
+                    <!--</tr>-->
+                    <tr th:each="message : ${messages}">
+                        <td style="padding:10px" th:text="${message.title}"></td>
+                        <td style="padding:10px" th:text="${message.content}"></td>
+                        <td style="padding:10px" th:text="${message.posteddate}"></td>
+                        <td>
+                            <a th:href="@{/update/{id}(id=${message.id})}">Update</a> -
+                            <a th:href="@{/detail/{id}(id=${message.id})}">View Message</a> -
+                            <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <table>
+                    <tr>
+                        <th>Title</th>
+                        <th>Posted by</th>
+                        <th></th>
+                    </tr>
+                    <tr th:each="message:${messages}">
+                        <td th:text="${message.title}"></td>
+                        <td th:text="${message.postedby}"></td>
+                        <td th:text="${message.posteddate}"></td>
+                        <td>
+                            <a th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                            <a th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                            <a th:href="@{/detail/{id}(id=${message.id})}">Details</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="base :: footer"></div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

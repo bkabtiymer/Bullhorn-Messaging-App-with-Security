@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SecurityBonesApplication {
+public class Week7ChallengeApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SecurityBonesApplication.class, args);
+		SpringApplication.run(Week7ChallengeApplication.class, args);
 	}
 }
